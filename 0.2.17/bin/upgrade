@@ -1,0 +1,27 @@
+#!/bin/bash -e
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+mysql_version="$1"
+old_cart_version="$2"
+new_cart_version="$3"
+
+OSE_20_LATEST="0.2.6"
+OSE_21_GA="0.2.12"
+
+# The LD_LIBRARY_PATH is now handled by the Node itself
+# and constructed using LD_LIBRARY_PATH_ELEMENT. This will
+# remove the existing LD_LIBRARY_PATH so the Node one can
+# take the precedence.
+#
+if version_lt $old_cart_version $OSE_21_GA; then
+  if [ -f ${OPENSHIFT_MYSQL_DIR}env/LD_LIBRARY_PATH ]; then
+    rm -f ${OPENSHIFT_MYSQL_DIR}env/LD_LIBRARY_PATH
+  fi
+fi
+
+# There is now a VERSION variable to allow the detection of 5.5
+# in rhcsh.
+if [[ $new_cart_version == "0.2.16" ]]; then
+  set_env_var 'OPENSHIFT_MYSQL_VERSION' $mysql_version $env_dir
+fi
