@@ -71,5 +71,5 @@ Version-Overrides:
     - mysql-singleton-master
 Install-Build-Required: false
 #Source-Url: git://github.com/wsun1/perlv2cart.git
-Source-Url: git://github.com/yyuanyuan/mysql55_test.git
-#Source-Url: file:///root/mysql22/
+#Source-Url: git://github.com/yyuanyuan/mysql55_test.git
+Source-Url: file:///root/mysql55_test/
